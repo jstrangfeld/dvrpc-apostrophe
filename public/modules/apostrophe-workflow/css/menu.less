@@ -1,0 +1,77 @@
+.apos-workflow-menu
+{
+  display: inline-block;
+  margin-left: 20px;
+  .apos-button--group
+  {
+    border: 0px;
+  }
+  .apos-button
+  {
+    margin-left: 5px;
+  }
+  // .apos-workflow-state is visible by default because we need
+  // to get to draft mode to access admin bar functionality in
+  // a way that isn't extremely difficult to debug
+  [data-apos-workflow-submit], [data-apos-workflow-commit], [data-apos-workflow-submitted],
+  {
+    display: none;
+  }
+  &.apos-workflow-editable
+  {
+    .apos-workflow-state
+    {
+      display: inline-block;
+    }
+  }
+  &.apos-workflow-modified.apos-workflow-committable
+  {
+    .apos-button--group
+    {
+      border: 2px solid;
+    }
+    [data-apos-workflow-commit], [data-apos-workflow-submitted] {
+      display: inline-block;
+    }
+  }
+  &.apos-workflow-unsubmitted
+  {
+    .apos-button--group
+    {
+      border: 2px solid;
+    }
+    [data-apos-workflow-submit] {
+      display: inline-block;
+    }
+  }
+  &.apos-workflow-modified.apos-workflow-committable.apos-workflow-unsubmitted
+  {
+    [data-apos-workflow-submitted] {
+      display: none;
+    }
+  }
+}
+
+.apos-ui .apos-workflow-state
+{
+	margin-left: 5px;
+	box-shadow: none;
+	.apos-workflow-state-toggle {
+		margin-left: 0;
+	}
+}
+
+// Modal case: page settings or pieces editor modal, where
+// we already know we can edit the draft, and the only question
+// is whether we can perform commit-related actions
+
+.apos-modal-controls {
+  [data-apos-workflow-commit], [data-apos-workflow-history], [data-apos-workflow-force-export] {
+    display: none;
+  }
+  &.apos-workflow-committable {
+    [data-apos-workflow-commit], [data-apos-workflow-history], [data-apos-workflow-force-export] {
+      display: list-item;
+    }
+  }
+}
